@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <title>JoyaGoo spreadsheet | Product Finds, QC &amp; Shipping Guide</title>
+  <meta name="description" content="Browse JoyaGoo spreadsheet finds from the CAFANS catalog, filter by category and compare USD reference prices. Check sizing, QC photos and shipping before ordering.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JoyaGoo spreadsheet | Product Finds &amp; Buying Guide">
+  <meta property="og:description" content="Compare shoes, sweatshirts, tees and jackets from CAFANS, then use a practical checklist for sizing, QC and shipping.">
+  <!-- index.html
+    Search results reviewed: joyagoosheets.com, joyagoowithqc.com,
+    joya-goo.com/spreadsheet/, and joyagootop.com. Exact Google positions were not verified.
+    Common features: category navigation, QC guidance and links to product finds.
+    This page adds a filterable CAFANS catalog sample with source URLs, explicit USD
+    reference prices, sizing checks and a calculator for comparing total order costs.
+    Indexing status: pending publication. Add a self-referencing canonical using the
+    final public URL. Submit that URL in Google Search Console URL Inspection and
+    Bing Webmaster Tools URL Submission once the domain is verified.
+  -->
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #13281e;
+      --muted: #466053;
+      --paper: #f4f6ef;
+      --white: #fff;
+      --line: #c9d7cb;
+      --forest: #123c2c;
+      --lime: #daf587;
+      font-family: "Instrument Sans", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.55; }
+    [hidden] { display: none !important; }
+    a { color: inherit; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid #568144; outline-offset: 4px; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .top { border-bottom: 1px solid var(--line); }
+    .top .wrap, .nav, .actions, .categories { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; }
+    .top .wrap { justify-content: space-between; padding-block: 15px; }
+    .brand, .nav a { text-decoration: none; font-weight: 700; }
+    .nav a { font-size: .92rem; }
+    .hero { margin-top: 22px; border-radius: 24px; padding: clamp(32px, 7vw, 86px) 20px; background: var(--forest); color: var(--white); text-align: center; }
+    .hero p { max-width: 590px; margin: 16px auto 24px; color: #e1ebdf; }
+    h1, h2, h3, p { overflow-wrap: break-word; }
+    h1, h2, h3 { line-height: 1.14; margin: 0; }
+    h1 { font-size: clamp(2.35rem, 7vw, 5.2rem); letter-spacing: -.06em; }
+    h2 { font-size: clamp(1.65rem, 3.6vw, 2.55rem); letter-spacing: -.04em; }
+    h3 { font-size: 1.1rem; }
+    .actions { justify-content: center; gap: 10px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 10px; padding: 9px 17px; text-decoration: none; font-weight: 750; border: 1px solid transparent; }
+    .button:hover { text-decoration: underline; }
+    .primary { background: var(--lime); color: var(--ink); }
+    .secondary { border-color: #aac2b2; color: var(--white); }
+    section { margin-block: clamp(35px, 6vw, 65px); scroll-margin-top: 16px; }
+    .intro, .note { color: var(--muted); }
+    .categories { gap: 8px; margin-block: 14px 20px; }
+    .categories a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 100px; background: var(--white); font-size: .9rem; }
+    .filters, .fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    label { display: block; font-weight: 650; }
+    input, select, button { font: inherit; }
+    input, select { display: block; width: 100%; min-height: 46px; margin-top: 5px; padding: 8px 10px; border: 1px solid #8ca393; border-radius: 8px; background: var(--white); color: var(--ink); }
+    #catalog-status { min-height: 1.55em; margin: 12px 0; color: var(--muted); }
+    .products, .guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .product, .panel, details { border: 1px solid var(--line); border-radius: 14px; background: var(--white); padding: 18px; }
+    .product { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
+    .product p, .product h3 { margin: 0; }
+    .product h3 { flex: 1; }
+    .category { color: var(--muted); font-size: .88rem; }
+    .price { font-size: 1.18rem; font-variant-numeric: tabular-nums; font-weight: 750; }
+    .product a { color: var(--forest); font-weight: 700; }
+    .guide-grid { margin-top: 16px; }
+    .panel p:last-child, details p:last-child { margin-bottom: 0; }
+    .budget { padding: clamp(16px, 4vw, 28px); }
+    .fields { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    button { cursor: pointer; background: var(--forest); color: var(--white); margin-top: 14px; }
+    output { display: block; min-height: 1.55em; margin-top: 10px; font-weight: 750; }
+    details { margin-top: 9px; }
+    summary { cursor: pointer; font-weight: 750; }
+    footer { border-top: 1px solid var(--line); padding-block: 22px; color: var(--muted); }
+    @media (max-width: 760px) {
+      .products, .guide-grid, .filters, .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .wrap { width: calc(100% - 24px); }
+      .products, .guide-grid, .filters, .fields { grid-template-columns: 1fr; }
+      .top .wrap { gap: 6px 14px; }
+      .nav { gap: 6px 14px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "JoyaGoo spreadsheet",
+    "inLanguage": "en",
+    "description": "An independent shopping guide featuring selected CAFANS listings, sizing checks, QC guidance and a USD cost calculator.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Selected CAFANS listings",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Leather Slides","url":"https://cafans.com/goods-158791.html"},
+        {"@type":"ListItem","position":2,"name":"Platform Slides","url":"https://cafans.com/goods-158790.html"},
+        {"@type":"ListItem","position":3,"name":"Sweatshirt","url":"https://cafans.com/goods-158792.html"},
+        {"@type":"ListItem","position":4,"name":"Unisex Embroidered Oversized T-Shirt","url":"https://cafans.com/goods-158200.html"},
+        {"@type":"ListItem","position":5,"name":"Jacket","url":"https://cafans.com/goods-158222.html"}
+      ]
+    }
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/ggrwp/">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#top">JoyaGoo spreadsheet</a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#catalog">Catalog</a>
+        <a href="#buying-guide">Buying guide</a>
+        <a href="#budget">Budget</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="top">
+    <header class="hero">
+      <h1>JoyaGoo spreadsheet</h1>
+      <p>Browse selected shoes and streetwear from CAFANS. Compare USD reference prices and check sizing, warehouse photos and shipping before you order.</p>
+      <div class="actions">
+        <a class="button primary" href="https://cafans.com">JoyaGoo spreadsheet</a>
+        <a class="button secondary" href="https://cafans.com">Buy it now</a>
+      </div>
+    </header>
+
+    <section id="catalog" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">Browse CAFANS product finds</h2>
+      <p class="intro">Prices below are USD references from the CAFANS featured catalog. Open the listing to check the current price and available options.</p>
+      <nav class="categories" aria-label="Full categories on CAFANS">
+        <a href="https://cafans.com/search-911.html">All shoes</a>
+        <a href="https://cafans.com/category-912-Hoodies%2FSweaters.html">All hoodies &amp; sweaters</a>
+        <a href="https://cafans.com/category-913-T-Shirts.html">All T-shirts</a>
+        <a href="https://cafans.com/category-914-Jackets.html">All jackets</a>
+      </nav>
+      <div class="filters" id="filters" hidden>
+        <label for="query">Search the sample
+          <input id="query" type="search" placeholder="e.g. slides">
+        </label>
+        <label for="category">Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option value="shoes">Shoes</option>
+            <option value="sweatshirts">Hoodies &amp; sweaters</option>
+            <option value="tees">T-shirts</option>
+            <option value="jackets">Jackets</option>
+          </select>
+        </label>
+        <label for="sort">Sort by
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="low">Price low to high</option>
+            <option value="high">Price high to low</option>
+          </select>
+        </label>
+      </div>
+      <p id="catalog-status" role="status" hidden></p>
+      <div class="products" id="products">
+        <article class="product" data-category="shoes" data-price="62.36">
+          <p class="category">Shoes</p>
+          <h3>Leather Slides</h3>
+          <p class="price">$62.36 USD</p>
+          <a href="https://cafans.com/goods-158791.html" aria-label="View Leather Slides on CAFANS">View listing →</a>
+        </article>
+        <article class="product" data-category="shoes" data-price="46.67">
+          <p class="category">Shoes</p>
+          <h3>Platform Slides</h3>
+          <p class="price">$46.67 USD</p>
+          <a href="https://cafans.com/goods-158790.html" aria-label="View Platform Slides on CAFANS">View listing →</a>
+        </article>
+        <article class="product" data-category="sweatshirts" data-price="27.50">
+          <p class="category">Hoodies &amp; sweaters</p>
+          <h3>Sweatshirt</h3>
+          <p class="price">$27.50 USD</p>
+          <a href="https://cafans.com/goods-158792.html" aria-label="View Sweatshirt on CAFANS">View listing →</a>
+        </article>
+        <article class="product" data-category="tees" data-price="32.64">
+          <p class="category">T-shirts</p>
+          <h3>Unisex Embroidered Oversized T-Shirt</h3>
+          <p class="price">$32.64 USD</p>
+          <a href="https://cafans.com/goods-158200.html" aria-label="View Unisex Embroidered Oversized T-Shirt on CAFANS">View listing →</a>
+        </article>
+        <article class="product" data-category="jackets" data-price="84.54">
+          <p class="category">Jackets</p>
+          <h3>Jacket</h3>
+          <p class="price">$84.54 USD</p>
+          <a href="https://cafans.com/goods-158222.html" aria-label="View Jacket on CAFANS">View listing →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="buying-guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">What to check before you order</h2>
+      <div class="guide-grid">
+        <article class="panel">
+          <h3>Confirm the exact option and size</h3>
+          <p>Save the product link, color and size together. For apparel, compare chest width, body length and sleeve length against a garment that fits you. For shoes, check whether the chart lists foot length or insole length before comparing centimeters.</p>
+        </article>
+        <article class="panel">
+          <h3>Review warehouse QC photos</h3>
+          <p>When photos are available, match the label, color and option to your order. Check visible seams, closures and obvious damage. If a measurement matters, ask for a photo with a ruler and confirm the agent’s exchange deadline.</p>
+        </article>
+        <article class="panel">
+          <h3>Compare shipping quotes</h3>
+          <p>Ask for packed dimensions, actual weight and the carrier’s billable weight. Compare quotes for the same destination and parcel. Record included services and any taxes or handling charges shown separately.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="budget" class="panel budget" aria-labelledby="budget-title">
+      <h2 id="budget-title">Estimate your total in USD</h2>
+      <p class="intro">Use quotes for your destination. Leave unknown charges blank and add them once you have estimates.</p>
+      <form id="budget-form" hidden>
+        <div class="fields">
+          <label>Product subtotal
+            <input name="products" type="number" min="0" max="1000000" step="0.01" inputmode="decimal" required>
+          </label>
+          <label>Local shipping &amp; fees
+            <input name="local" type="number" min="0" max="1000000" step="0.01" inputmode="decimal">
+          </label>
+          <label>International shipping
+            <input name="international" type="number" min="0" max="1000000" step="0.01" inputmode="decimal">
+          </label>
+          <label>Taxes &amp; duties
+            <input name="tax" type="number" min="0" max="1000000" step="0.01" inputmode="decimal">
+          </label>
+        </div>
+        <button class="button" type="submit">Calculate total</button>
+        <output id="estimate" aria-live="polite"></output>
+      </form>
+      <noscript><p>Add the product subtotal, local shipping and fees, international shipping, and any taxes or duties to estimate the total.</p></noscript>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">JoyaGoo spreadsheet FAQ</h2>
+      <details>
+        <summary>What is a JoyaGoo spreadsheet?</summary>
+        <p>It is a directory of product links used to compare finds before ordering through a shopping agent. This independent guide uses selected listings from CAFANS.</p>
+      </details>
+      <details>
+        <summary>Where do the two main buttons go?</summary>
+        <p>Both open the CAFANS homepage. The product links open individual CAFANS listings, where you can review details and see any available agent options.</p>
+      </details>
+      <details>
+        <summary>Do the listed USD prices include shipping?</summary>
+        <p>The cards show item reference prices. Check the current item price, agent charges and shipping quote for your selected option and destination.</p>
+      </details>
+      <details>
+        <summary>Where can I see QC photos?</summary>
+        <p>Check the listing and the agent’s order page for available photos. Ask which warehouse photos are provided for your order and when you can review them.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Independent shopping guide · Catalog source <a href="https://cafans.com">CAFANS</a></div>
+  </footer>
+
+  <script>
+    (() => {
+      const catalog = document.getElementById("products");
+      const cards = Array.from(catalog.querySelectorAll(".product"));
+      const query = document.getElementById("query");
+      const category = document.getElementById("category");
+      const sort = document.getElementById("sort");
+      const status = document.getElementById("catalog-status");
+
+      function updateCatalog() {
+        const term = query.value.trim().toLowerCase();
+        const ordered = [...cards];
+
+        if (sort.value !== "featured") {
+          const direction = sort.value === "low" ? 1 : -1;
+          ordered.sort((first, second) =>
+            direction * (Number(first.dataset.price) - Number(second.dataset.price))
+          );
+          // Keep keyboard focus on the active filter while cards move.
+        }
+
+        let visible = 0;
+        for (const card of ordered) {
+          const matchesCategory = !category.value || card.dataset.category === category.value;
+          const searchableText = `${card.querySelector("h3").textContent} ${card.querySelector(".category").textContent}`;
+          card.hidden = !(matchesCategory && searchableText.toLowerCase().includes(term));
+          if (!card.hidden) visible += 1;
+          catalog.append(card);
+        }
+
+        status.textContent = visible
+          ? `${visible} ${visible === 1 ? "listing" : "listings"} shown`
+          : "No matching listings. Try another search or category.";
+      }
+
+      query.addEventListener("input", updateCatalog);
+      category.addEventListener("change", updateCatalog);
+      sort.addEventListener("change", updateCatalog);
+      document.getElementById("filters").hidden = false;
+      status.hidden = false;
+      updateCatalog();
+
+      const form = document.getElementById("budget-form");
+      const estimate = document.getElementById("estimate");
+      const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+      form.hidden = false;
+
+      form.addEventListener("input", () => {
+        estimate.textContent = "";
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const amounts = Array.from(new FormData(form).values());
+        const cents = amounts.reduce((sum, value) => sum + Math.round(Number(value) * 100), 0);
+        const result = `Estimated total ${usd.format(cents / 100)} USD.`;
+        const partial = amounts.some((value) => value === "");
+        estimate.textContent = partial ? `${result} Blank charges are excluded.` : result;
+      });
+    })();
+  </script>
+</body>
+</html>
